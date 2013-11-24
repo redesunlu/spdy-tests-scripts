@@ -1,0 +1,81 @@
+\begin{thebibliography}{10}
+
+\bibitem{headersHTTP}
+Header field definitions.
+\newblock \url{http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html}.
+\newblock part of Hypertext Transfer Protocol -- HTTP/1.1 - RFC 2616.
+
+\bibitem{httpArchive}
+Http archive.
+\newblock \url{http://httparchive.org}.
+
+\bibitem{rfcHTTP}
+Hypertext transfer protocol -- http/1.1.
+\newblock \url{http://www.ietf.org/rfc/rfc2616.txt}.
+
+\bibitem{modSPDY}
+mod-spdy - apache spdy module.
+\newblock \url{http://code.google.com/p/mod-spdy/}.
+
+\bibitem{picoBSD}
+Picobsd.
+\newblock \url{http://people.freebsd.org/~picobsd/old/picobsd.html}.
+
+\bibitem{rfcSSL}
+The secure sockets layer (ssl) protocol version 3.0.
+\newblock \url{http://tools.ietf.org/html/rfc6101}.
+
+\bibitem{flags}
+World flags mod\_spdy demo.
+\newblock \url{https://www.modspdy.com/world-flags/}.
+
+\bibitem{moreBand}
+Mike Belshe.
+\newblock More bandwidth doesn't matter (much).
+\newblock Agosto 4 - 2010.
+
+\bibitem{harCapt}
+Andrea Cardaci.
+\newblock Capture har files from a remote chrome instance.
+\newblock \url{https://github.com/cyrus-and/chrome-har-capturer}.
+
+\bibitem{debuggingChrome}
+Google Developers.
+\newblock Remote debugging protocol.
+\newblock
+  \url{https://developers.google.com/chrome-developer-tools/docs/debugger-protocol}.
+
+\bibitem{apache}
+The Apache~Software Foundation.
+\newblock Apache.
+\newblock \url{http://www.apache.org}.
+
+\bibitem{dummynet}
+FreeBSD.
+\newblock Dummynet.
+\newblock \url{http://www.freebsd.org/cgi/man.cgi?query=dummynet}.
+
+\bibitem{ipfw}
+FreeBSD.
+\newblock Ipfw.
+\newblock
+  \url{http://www.freebsd.org/cgi/man.cgi?query=ipfw&sektion=8&apropos=0&manpath=FreeBSD+9.2-RELEASE}.
+
+\bibitem{illustratedTCPIP}
+W.~Richard Stevens.
+\newblock {\em TCP/IP Illustrated, Volume 1}.
+\newblock Addison-Wesley Professional, 1994.
+\newblock Section 1.2 Layering.
+
+\bibitem{averageWebPage}
+website optimization.
+\newblock Average web page size triples since 2008.
+\newblock
+  \url{http://www.websiteoptimization.com/speed/tweak/average-web-page/}.
+
+\bibitem{SPDYWhitepaper}
+website optimization.
+\newblock Spdy: An experimental protocol for a faster web.
+\newblock \url{http://www.chromium.org/spdy/spdy-whitepaper}.
+
+\end{thebibliography}
