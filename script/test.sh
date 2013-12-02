@@ -1,49 +1,54 @@
 #!/bin/bash
 
-#facebook.com
-#google.com
-#youtube.com
-#blogger.com
-#twitter.com
-#wordpress.com
-#imgur.com
-#youm7.com
-#blog in blogger
-#site in wordpress
+# This script executes chromium, tshark and chrome-har-capturer to test 3 different methods 
+# to load a web page (http,https,spdy) in order to determine which one is faster/better.
 
+# Requeriments:
+# - Chromium or Chrome
+# - TShark
+# - Chrome-har-capturer: https://github.com/cyrus-and/chrome-har-capturer
+
+# Ensure your dumpcap binary has CAP_NET_ADMIN capabilities, so you don't have to be root
+# setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
+
+export DISPLAY=:0
 source config.cfg
-mkdir -p $output
+mkdir -p $outputdir
 mkdir -p $datadir
 methods=("http" "https" "spdy")
-for method in "${methods[@]}"
-	do
-		for site in $(cat sites.txt)
-			do
-				day=$(date +"%d%m%Y")
-				hour=$( date +"%H%M")
-				file="$method-$site-$day-$hour"
-				rm -r $datadir
-				tmpmethod=$method
-				if [ "$method" = "spdy" ]; then
-					tmpmethod="https"
-					$chrome --remote-debugging-port=9222 --user-data-dir=$datadir --no-first-run --enable-benchmarking --dns-prefetch-disable --disable-translate --disable-extensions --disable-background-networking --safebrowsing-disable-auto-update --ignore-certificate-errors about:blank &
-				else
-					$chrome --remote-debugging-port=9222 --user-data-dir=$datadir --no-first-run --enable-benchmarking --dns-prefetch-disable --disable-translate --disable-extensions --disable-background-networking --safebrowsing-disable-auto-update --ignore-certificate-errors --use-spdy=off about:blank &
-				fi
-				PID_CHROME=$!
-				sleep 10s
-				$tshark -i eth0 -w $output$file.cap &
-				PID_TSHARK=$!
-				sleep 10s
-				url="$tmpmethod://$site"
-				$harcapt -o $output$file.har $url 
-				PID_HAR=$!
-				sync
-				kill $PID_CHROME
-				kill $PID_TSHARK
-				day=$(date +"%d%m%Y")
-				hour=$( date +"%H%M")
-				echo "Method: $method - Site: $site - $day, $hour" >> log.txt 
-				sleep 20s
-		done
+rm $outputdir* $logfile
+touch $logfile
+for method in "${methods[@]}"; do
+	urlmethod=$method
+	exec_cmd=$cmd
+	if [ "$method" = "spdy" ]; then
+		urlmethod="https"
+	else
+		exec_cmd="$cmd --use-spdy=off"
+	fi
+	for site in $sites; do
+		echo "STARTED. Method: $method - Site: $site - $(date)" >> $logfile 
+		day=$(date +"%d%m%Y")
+		hour=$(date +"%H%M")
+		file="$method-$site-$day-$hour"
+		rm -r $datadir
+		exec_cmd="$exec_cmd about:blank"
+		#echo "Executing: $exec_cmd" >> $logfile
+		$exec_cmd &
+		PID_CHROME=$!
+		sleep 3
+		#echo "Executing: $tshark -i $iface -w $outputdir$file.cap" >> $logfile
+		$tshark -i $iface -w $outputdir$file.cap &
+		PID_TSHARK=$!
+		sleep 3
+		url="$urlmethod://$site"
+		#echo "Executing: $harcapt -o $outputdir$file.har $url" >> $logfile
+		$harcapt -o $outputdir$file.har $url 
+		sync
+		kill $PID_CHROME
+		sleep 5
+		kill $PID_TSHARK
+		echo "FINISHED. Method: $method - Site: $site - $(date)" >> $logfile 
+		sync
 	done
+done
