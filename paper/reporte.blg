@@ -7,49 +7,55 @@ Warning--to sort, need author or key in rfcHTTP
 Warning--to sort, need author or key in httpArchive
 Warning--to sort, need author or key in rfcSSL
 Warning--to sort, need author or key in headersHTTP
-Warning--to sort, need author or key in picoBSD
+Warning--to sort, need author or key in virtualBox
+Warning--to sort, need author or key in maqVirtuales
+Warning--to sort, need author or key in FreeBSD
 Warning--to sort, need author or key in flags
+Warning--to sort, need author or key in modSSL
 Warning--to sort, need author or key in modSPDY
+Warning--to sort, need author or key in nodeJS
+Warning--to sort, need author or key in json
+Warning--to sort, need author or key in tshark
 Warning--empty journal in moreBand
-You've used 16 entries,
+You've used 28 entries,
             2118 wiz_defined-function locations,
-            567 strings with 5683 characters,
-and the built_in function-call counts, 3001 in all, are:
-= -- 280
-> -- 70
+            612 strings with 6696 characters,
+and the built_in function-call counts, 5180 in all, are:
+= -- 484
+> -- 118
 < -- 0
-+ -- 35
-- -- 18
-* -- 88
-:= -- 448
-add.period$ -- 43
-call.type$ -- 16
-change.case$ -- 56
++ -- 60
+- -- 30
+* -- 148
+:= -- 753
+add.period$ -- 73
+call.type$ -- 28
+change.case$ -- 97
 chr.to.int$ -- 0
-cite$ -- 24
-duplicate$ -- 120
-empty$ -- 355
-format.name$ -- 18
-if$ -- 686
+cite$ -- 42
+duplicate$ -- 204
+empty$ -- 625
+format.name$ -- 30
+if$ -- 1196
 int.to.chr$ -- 0
-int.to.str$ -- 16
+int.to.str$ -- 28
 missing$ -- 3
-newline$ -- 78
-num.names$ -- 18
-pop$ -- 127
+newline$ -- 132
+num.names$ -- 30
+pop$ -- 226
 preamble$ -- 1
-purify$ -- 41
+purify$ -- 71
 quote$ -- 0
-skip$ -- 121
+skip$ -- 215
 stack$ -- 0
-substring$ -- 81
-swap$ -- 15
+substring$ -- 142
+swap$ -- 27
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
-warning$ -- 8
-while$ -- 18
-width$ -- 18
-write$ -- 137
-(There were 8 warnings)
+type$ -- 110
+warning$ -- 14
+while$ -- 30
+width$ -- 30
+write$ -- 233
+(There were 14 warnings)

@@ -1,5 +1,16 @@
 \begin{thebibliography}{10}
 
+\bibitem{maqVirtuales}
+\url{http://www.marcelofernandez.info/files/}.
+
+\bibitem{modSSL}
+Apache module mod\_ssl.
+\newblock \url{http://httpd.apache.org/docs/2.2/mod/mod_ssl.html}.
+
+\bibitem{FreeBSD}
+Freebsd.
+\newblock \url{http://www.freebsd.org/es/}.
+
 \bibitem{headersHTTP}
 Header field definitions.
 \newblock \url{http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html}.
@@ -13,17 +24,29 @@ Http archive.
 Hypertext transfer protocol -- http/1.1.
 \newblock \url{http://www.ietf.org/rfc/rfc2616.txt}.
 
+\bibitem{json}
+Introducing json.
+\newblock \url{http://www.json.org/}.
+
 \bibitem{modSPDY}
 mod-spdy - apache spdy module.
 \newblock \url{http://code.google.com/p/mod-spdy/}.
 
-\bibitem{picoBSD}
-Picobsd.
-\newblock \url{http://people.freebsd.org/~picobsd/old/picobsd.html}.
+\bibitem{nodeJS}
+nodejs.
+\newblock \url{http://nodejs.org/}.
 
 \bibitem{rfcSSL}
 The secure sockets layer (ssl) protocol version 3.0.
 \newblock \url{http://tools.ietf.org/html/rfc6101}.
+
+\bibitem{tshark}
+Tshark.
+\newblock \url{http://www.wireshark.org/docs/man-pages/tshark.html}.
+
+\bibitem{virtualBox}
+Virtual box.
+\newblock \url{https://www.virtualbox.org/}.
 
 \bibitem{flags}
 World flags mod\_spdy demo.
@@ -45,6 +68,13 @@ Google Developers.
 \newblock
   \url{https://developers.google.com/chrome-developer-tools/docs/debugger-protocol}.
 
+\bibitem{tammy}
+Tammy Everts.
+\newblock The average web page has grown 151\% in just three years.
+\newblock
+  \url{http://www.webperformancetoday.com/2013/11/26/web-page-growth-151-percent/}.
+\newblock 26 de Noviembre 2013.
+
 \bibitem{apache}
 The Apache~Software Foundation.
 \newblock Apache.
@@ -61,11 +91,37 @@ FreeBSD.
 \newblock
   \url{http://www.freebsd.org/cgi/man.cgi?query=ipfw&sektion=8&apropos=0&manpath=FreeBSD+9.2-RELEASE}.
 
+\bibitem{github}
+GitHub.
+\newblock Github · build software better, together.
+\newblock \url{https://github.com/}.
+
+\bibitem{lubuntu}
+Lubuntu.
+\newblock lubuntu, lightweight, fast, easier.
+\newblock \url{http://www.lubuntu.net/}.
+
+\bibitem{spdyGT}
+mdsteele@google.com.
+\newblock Getting started with mod\_spdy.
+\newblock \url{https://code.google.com/p/mod-spdy/wiki/GettingStarted}.
+
 \bibitem{illustratedTCPIP}
 W.~Richard Stevens.
 \newblock {\em TCP/IP Illustrated, Volume 1}.
 \newblock Addison-Wesley Professional, 1994.
 \newblock Section 1.2 Layering.
+
+\bibitem{siffSSL}
+Chris Strom.
+\newblock Ssl that can be sniffed by wireshark.
+\newblock
+  \url{http://japhr.blogspot.com.ar/2011/05/ssl-that-can-be-sniffed-by-wireshark.html}.
+
+\bibitem{ubuntu}
+Ubuntu.
+\newblock Ubuntu server - for scale-out computing.
+\newblock \url{http://www.ubuntu.com/server}.
 
 \bibitem{averageWebPage}
 website optimization.
