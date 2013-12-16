@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt,twocolumns]{article}
+\documentclass[a4paper,11pt,twocolumn]{article}
 %\documentclass[dvips]{article}
 \usepackage{graphicx}
 \usepackage[spanish,activeacute]{babel}
@@ -8,12 +8,12 @@
 \usepackage{amssymb,amsmath}
 \usepackage{draftwatermark}
 \usepackage{graphicx}
+\usepackage{pseudocode}
 \usepackage[normalem]{ulem}
 \SetWatermarkFontSize{40pt}
 \SetWatermarkScale{6}
 \begin{document}
 
-\twocolumn
 \setlength{\columnsep}{25pt}
 
 \title{Midiendo la Performance de SPDY}
@@ -76,18 +76,17 @@ Permite al Servidor ''sugerirle'' al Cliente que pida alg'un recurso espec'ifico
 \end{enumerate}
 
 \section{Experimento 1}
-
+\label{experimento1}
 \subsection{Preparaci'on}
 
 Se virtualizaron 3 m'aquinas utilizando VirtualBox \cite{virtualBox}, disponibles para su descarga en \cite{maqVirtuales}.
-Se dise'no la siguiente topolog'ia de Red:
+Se dise'no la topolog'ia de Red de la Figura \ref{diagramavms}.
 
-\vspace*{1\baselineskip}
-\begin{math}
-\frac{\textbf{CLIENTE}}{Lubuntu 13.10 \cite{lubuntu}} \longleftrightarrow \frac{\textbf{PROXY}}{FreeBSD \cite{FreeBSD}}  \longleftrightarrow \frac{\textbf{SERVIDOR}}{Ubuntu Server 13.10 \cite{ubuntu}} 
-\end{math}
-
-\vspace*{1\baselineskip}
+\begin{figure*}[ht]
+  \centering\includegraphics[scale=0.5]{diagramavms}
+  \caption{Diagrama de Red del Entorno Virtual del Experimento 1}
+  \label{diagramavms}
+\end{figure*}
 
 \begin{enumerate}
 \item SERVIDOR
@@ -130,7 +129,7 @@ Se configur'o el siguiente flag:
 \begin{quote}\small
 sysctl net.inet.ip.forwarding=1
 \end{quote}
-Y por 'ultimo, para que la Dummynet se cargue junto con el Kernel del BSD se agreg'o la siguiente l'inea en el archivo \emph{''/bot/loader.conf''}
+Y por 'ultimo, para que la Dummynet inicie junto con el Kernel del BSD se agreg'o la siguiente l'inea en el archivo \emph{''/bot/loader.conf''}
 \begin{quote}\small
 dummynet\_load=''YES''
 \end{quote}
@@ -168,29 +167,115 @@ Con la idea de comparar los m'etodos \textsc{http}, \textsc{https} y \textsc{spd
 	\\
 \end{tabular}
 
-Estos valores, se iban configurando autom'aticamente en el Proxy mediante el siguiente comando:
+En el Proxy, se cre'o una \emph{tuber'ia}\footnote{objeto intermediario donde se simulan diferentes entornos} de la siguiente manera
 
 \begin{quote}\small
-comando
+ipfw add 1000 pipe 1 ip from any to any;
 \end{quote}
 
-Se combinaron todos los Anchos de Banda con todos los Retrasos para cada uno de los m'etodos por p'agina\footnote{Por ejemplo: 100Kbps de Ancho de Banda con 100ms de Retraso accediendo al host virtual de Amazon por \textsc{https} (https://www.amazon.com).}, se repiti'o el experimento 5 veces y se promediaron los resultados.
+Y los valores se iban configurando autom'aticamente en mediante el siguiente comando:
+
+\begin{quote}\small
+ipfw pipe 1 config bw 1000Kbp/s delay 100ms;
+\end{quote}
+
+Se combinaron todos los Anchos de Banda con todos los Retrasos para cada uno de los m'etodos por p'agina\footnote{Por ejemplo: 100Kbps de Ancho de Banda con 100ms de Retraso accediendo al host virtual de Amazon por \textsc{https} (https://www.amazon.com).}.
+
+En el Servidor se iba activando o desactivando \emph{mod\_spdy} seg'un era requerido.
+
+El algoritmo\footnote{Disponible en \cite[exp1.sh]{spdy-tests}} fu'e el siguiente:
+
+\begin{pseudocode}{experimento1}{ }
+\FOR ancho\ de\ banda \in anchos\ de\ bandas \DO \\
+	\BEGIN
+	\FOR retardo \in retardos \DO \\
+		\BEGIN
+			configurar\ valores\ en\ el\ proxy \\
+			\FOR metodo \in (http,https,spdy) \DO \\
+				\BEGIN
+					\IF metodo == spdy
+					\THEN
+						activar\ spdy\ en\ el\ servidor
+					\ELSE
+						desactivar\ spdy\ en\ el\ servidor\\
+					\FOR sitio \in sitios \DO \\
+					\BEGIN
+						iniciar\ chrome\\
+						iniciar\ captura\ con\ tshark\\
+						ejecutar\ chrome-har-capturer\\
+						cerrar\ chrome\\
+						cerrar\ tshark
+					\END
+				\END
+		\END
+	\END
+\end{pseudocode}
+
+Se repiti'o el experimento 7 veces y se promediaron los resultados.
 
 \subsection{Resultados}
 
-SEGUIR ACA
-
-\includegraphics[scale=0.5]{res_amazon}
+...
 
 \section{Experimento 2}
-
+\label{experimento2}
 \subsection{Preparaci'on}
+
+Se configur'o un Cliente con las mismas configuraciones que las del Experimento 1 (ver secci'on \ref{experimento1}). Se seleccionaron los siguientes sitios, basados en el art'iculo \cite{effectSPDY}, con el agregado de 2 sitios m'as con diferente contenido para la prueba:
+\begin{enumerate}
+\item www.facebook.com
+\item www.google.com
+\item www.youtube.com
+\item www.blogger.com
+\item www.twitter.com
+\item www.wordpress.com
+\item www.imgur.com
+\item www.youm7.com
+\item consigueregalos.blogspot.com
+\item oprojetopedal.wordpress.com
+\end{enumerate}
 
 \subsection{Metodolog'ia}
 
+Se modific'o el algoritmo utilizado en el experimento anterior quedando 'este de la siguiente manera:
+
+\begin{pseudocode}{experimento2}{ }
+\FOR metodo \in (http,https,spdy) \DO \\
+\BEGIN
+	\FOR sitio \in sitios \DO \\
+	\BEGIN
+		iniciar\ chrome\\
+		iniciar\ captura\ con\ tshark\\
+		ejecutar\ chrome-har-capturer\\
+		cerrar\ chrome\\
+		cerrar\ tshark
+	\END
+\END
+\end{pseudocode}
+
+Luego, se dej'o el experimento corriendo durante 7 d'ias, ejecut'andose el mismo en diferentes horas:
+
+\begin{enumerate}
+\item 00:00
+\item 04:00
+\item 08:00
+\item 12:00
+\item 16:00
+\item 20:00
+\end{enumerate}
+
 \subsection{Resultados}
 
+...
+
 \section{Conclusiones y Trabajos Relacionados}
+
+...
+
+
+A futuro una de las pruebas a realizar ser'ia, utilizando la suite de prueba del Experimento 1, ejecutar los tests pero con otros servidores que soporten SPDY, tales como \emph{Jetty Web Server}\footnote{http://wiki.eclipse.org/Jetty/Feature/SPDY}, \emph{Python implementation of a SPDY server}\footnote{http://github.com/mnot/nbhttp/tree/spdy}, \emph{Ruby SPDY}\footnote{https://github.com/igrigorik/spdy} o \emph{node.js SPDY}\footnote{https://github.com/indutny/node-spdy}.
+
+Agregar Selenium.
 
 \nocite{*}
 \bibliography{bibliography}

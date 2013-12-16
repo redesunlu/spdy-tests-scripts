@@ -55,7 +55,7 @@ World flags mod\_spdy demo.
 \bibitem{moreBand}
 Mike Belshe.
 \newblock More bandwidth doesn't matter (much).
-\newblock Agosto 4 - 2010.
+\newblock 4 de Agosto 2010.
 
 \bibitem{harCapt}
 Andrea Cardaci.
@@ -67,6 +67,12 @@ Google Developers.
 \newblock Remote debugging protocol.
 \newblock
   \url{https://developers.google.com/chrome-developer-tools/docs/debugger-protocol}.
+
+\bibitem{effectSPDY}
+Yehia Elkhatib, Gareth Tyson, and Michael Welzl.
+\newblock The effect of network and infrastructural variables on spdy's
+  performance.
+\newblock 29 de Julio 2013.
 
 \bibitem{tammy}
 Tammy Everts.
@@ -100,6 +106,11 @@ GitHub.
 Lubuntu.
 \newblock lubuntu, lightweight, fast, easier.
 \newblock \url{http://www.lubuntu.net/}.
+
+\bibitem{spdy-tests}
+Pablo~Maximiliano Lulic.
+\newblock spdy-tests.
+\newblock \url{https://github.com/maxisoad/spdy-tests}.
 
 \bibitem{spdyGT}
 mdsteele@google.com.
