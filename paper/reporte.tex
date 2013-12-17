@@ -33,13 +33,6 @@ El protocolo \textsc{http} tuvo su primera versi'on en mayo de 1996, culminando 
 
 En comparaci'on con lo que era la web en la 'epoca en la que se implement'o el protocolo \textsc{http}, hubo un crecimiento amplio en el tama'no y en la cantidad de recursos de un sitio web. Para Noviembre de 2013 \cite{httpArchive}, el tama'no promedio de un sitio era de 1614kb, en contraste con Noviembre de 2010 que el tama'no promedio era de 702kb, el aumento fue casi del 50\%. Estudios m'as recientes, indican que el crecimiento de un sitio promedio es del \%151 \cite{tammy} (ver figura \ref{average}).
 
-\begin{figure}[h!]
-  	\centering
-	\includegraphics[scale=0.4]{151tammy}
-	\caption{\small Crecimiento del tama'no de los sitios promedio, extra'ido de \cite{tammy}}
-	\label{average}
-\end{figure}
-
 El crecimiento se produce con velocidad \cite{averageWebPage} y hay otras cuestiones relacionadas al tiempo de carga de una p'agina, no solo el ancho de banda \cite{moreBand}, sino por ejemplo, el \textsc{rtt}\footnote{Tiempo que tarda un paquete de datos en ir desde el emisor al receptor y volver al emisor.}, como se puede ver en la figura \ref{rttBelsche}
 
 \begin{figure}[h!]
@@ -50,7 +43,12 @@ El crecimiento se produce con velocidad \cite{averageWebPage} y hay otras cuesti
 \end{figure}
 
 \section{SPDY}
-
+\begin{figure}[h!]
+  	\centering
+	\includegraphics[scale=0.4]{151tammy}
+	\caption{\small Crecimiento del tama'no de los sitios promedio, extra'ido de \cite{tammy}}
+	\label{average}
+\end{figure}
 \textsc{spdy}\cite{SPDYWhitepaper} es un protocolo de la capa de aplicaci'on \cite{illustratedTCPIP} que funciona sobre SSL \cite{rfcSSL}, permite la transmisi'on de Streams\footnote{Flujo de Datos.} sobre una conexi'on normal de \textsc{tcp}, que es el Protocolo de Control de Transmisi'on de la capa de Transporte \cite{illustratedTCPIP}). A continuaci'on se comentar'an las caracter'isticas del Protocolo (extra'idas de \cite{SPDYWhitepaper}):
 
 \begin{enumerate}
@@ -336,12 +334,176 @@ Finalizada la semana, se recolectaron los datos de la misma manera que en el Exp
 
 \subsection{Resultados}
 
+Se recolectaron entre 44 y 47 capturas de cada sitio por m'etodo, se promediaron los resultados y se ven en los siguientes cuadros. 
+\vspace*{2\baselineskip}
+
+\emph{consigueregalos.blogspot.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hlineHTTP & 3585 & 5909 & 8419 \\
+HTTPS & 3533 & 5383 & 7831 \\
+SPDY & 3249 & 4995 & 8046 \\
+\hline
+\end{tabular}}
+
+\emph{oprojetopedal.wordpress.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 4175 & 6293 & 8332 \\
+HTTPS & 5234 & 6668 & 8596 \\
+SPDY & 4603 & 7457 & 9375 \\
+\hline
+\end{tabular}}
+
+\emph{www.blogger.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 3801 & 3911 & 5510 \\
+HTTPS & 3782 & 3841 & 5439 \\
+SPDY & 3374 & 3473 & 4832 \\
+\hline
+\end{tabular}}
+
+\emph{www.facebook.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 4638 & 6433 & 8072 \\
+HTTPS & 3508 & 4462 & 6150 \\
+SPDY & 2880 & 3915 & 5827 \\
+\hline
+\end{tabular}}
+
+\emph{www.google.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 1750 & 2645 & 4348 \\
+HTTPS & 1641 & 2552 & 3819 \\
+SPDY & 1525 & 2270 & 3713 \\
+\hline
+\end{tabular}}
+
+\emph{www.imgur.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 5299 & 12122 & 14569 \\
+HTTPS & 5174 & 10305 & 13115 \\
+SPDY & 5506 & 12690 & 15145 \\
+\hline
+\end{tabular}}
+
+\emph{www.twitter.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 4864 & 6008 & 7553 \\
+HTTPS & 4381 & 5454 & 6863 \\
+SPDY & 3793 & 4853 & 6867 \\
+\hline
+\end{tabular}}
+
+\emph{www.wordpress.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 2522 & 2648 & 4363 \\
+HTTPS & 2654 & 2794 & 4430 \\
+SPDY & 2788 & 2907 & 4189 \\
+\hline
+\end{tabular}}
+
+\emph{www.youm7.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 5909 & 37539 & 40364 \\
+HTTPS & 4990 & 14957 & 17641 \\
+SPDY & 4534 & 17363 & 20064 \\
+\hline
+\end{tabular}}
+
+\emph{www.youtube.com}
+\scalebox{0.8}{
+\begin{tabular}{||l | r || r || r||}
+\hline
+\hline
+ & onContentLoad & onLoad & Tow\\
+\hline
+HTTP & 1455 & 1577 & 3200 \\
+HTTPS & 1657 & 1712 & 3440 \\
+SPDY & 1730 & 1730 & 3445 \\
+\hline
+\end{tabular}}
+
+\begin{figure*}[ht]
+  	\centering
+	\includegraphics[scale=0.93]{exp2_1}
+	\caption{\small onContentLoad}
+	\label{graf7}
+\end{figure*}
+
+\begin{figure*}[ht]
+  	\centering
+	\includegraphics[scale=0.93]{exp2_2}
+	\caption{\small onLoad}
+	\label{graf8}
+\end{figure*}
+
+\begin{figure*}[ht]
+  	\centering
+	\includegraphics[scale=0.93]{exp2_3}
+	\caption{\small ToW}
+	\label{graf9}
+\end{figure*}
+
+\vspace*{2\baselineskip}
+En el 60\% de los casos \textsc{spdy} super'o a \textsc{https} y a \textsc{http}, y en un 70\% super'o a \textsc{https}. Son cifras importantes dado que el 91\% de los sitios en Internet usan \textsc{http} PONER CITA.
+(Agregar lo de http2)
+
+(poner las caracteristicas de los sitios en el que spdy es mejor)
+
+(poner porque  fue superado en youm y en imgur)
+
+\section{Conclusiones}
+
 ...
 
-\section{Conclusiones y Trabajos Relacionados}
+...
 
 ...
 
+\section{Trabajos Futuros}
 
 A futuro una de las pruebas a realizar ser'ia, utilizando la suite de prueba del Experimento 1, ejecutar los tests pero con otros servidores que soporten SPDY, tales como \emph{Jetty Web Server}\footnote{http://wiki.eclipse.org/Jetty/Feature/SPDY}, \emph{Python implementation of a SPDY server}\footnote{http://github.com/mnot/nbhttp/tree/spdy}, \emph{Ruby SPDY}\footnote{https://github.com/igrigorik/spdy} o \emph{node.js SPDY}\footnote{https://github.com/indutny/node-spdy}. Para poder medir la performance de \emph{spdy} en diferentes implementaciones del protocolo.
 
