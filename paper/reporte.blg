@@ -8,55 +8,56 @@ Warning--to sort, need author or key in httpArchive
 Warning--to sort, need author or key in rfcSSL
 Warning--to sort, need author or key in headersHTTP
 Warning--to sort, need author or key in virtualBox
-Warning--to sort, need author or key in maqVirtuales
 Warning--to sort, need author or key in flags
 Warning--to sort, need author or key in modSSL
 Warning--to sort, need author or key in modSPDY
 Warning--to sort, need author or key in nodeJS
 Warning--to sort, need author or key in json
 Warning--to sort, need author or key in tshark
+Warning--to sort, need author or key in SQLite
+Warning--to sort, need author or key in selenium
 Warning--to sort, need author or key in FreeBSD
 Warning--empty journal in moreBand
 Warning--empty journal in effectSPDY
-You've used 30 entries,
+You've used 34 entries,
             2118 wiz_defined-function locations,
-            620 strings with 6932 characters,
-and the built_in function-call counts, 5656 in all, are:
-= -- 527
-> -- 143
+            637 strings with 7307 characters,
+and the built_in function-call counts, 6427 in all, are:
+= -- 599
+> -- 165
 < -- 0
-+ -- 71
-- -- 38
-* -- 170
-:= -- 837
-add.period$ -- 79
-call.type$ -- 30
-change.case$ -- 107
++ -- 81
+- -- 44
+* -- 190
+:= -- 957
+add.period$ -- 90
+call.type$ -- 34
+change.case$ -- 122
 chr.to.int$ -- 0
-cite$ -- 45
-duplicate$ -- 221
-empty$ -- 664
-format.name$ -- 38
-if$ -- 1293
+cite$ -- 50
+duplicate$ -- 249
+empty$ -- 753
+format.name$ -- 44
+if$ -- 1468
 int.to.chr$ -- 0
-int.to.str$ -- 30
+int.to.str$ -- 34
 missing$ -- 4
-newline$ -- 142
-num.names$ -- 34
-pop$ -- 242
+newline$ -- 161
+num.names$ -- 40
+pop$ -- 274
 preamble$ -- 1
-purify$ -- 79
+purify$ -- 90
 quote$ -- 0
-skip$ -- 230
+skip$ -- 261
 stack$ -- 0
-substring$ -- 153
-swap$ -- 28
+substring$ -- 173
+swap$ -- 32
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 118
-warning$ -- 15
-while$ -- 34
-width$ -- 32
-write$ -- 251
-(There were 15 warnings)
+type$ -- 134
+warning$ -- 16
+while$ -- 40
+width$ -- 36
+write$ -- 285
+(There were 16 warnings)

@@ -22,7 +22,7 @@
 \maketitle
 
 \begin{abstract} 
-Actualmente, la Web se sustenta con el est'andar \textsc{http}. Este protocolo tuvo su 'ultima versi'on en el a'no 1999. L'as p'aginas en ese entonces eran muy diferentes a las actuales, tanto en contenido como en recursos. Google desarroll'o un protocolo en el a'no 2009 llamado \textsc{spdy}, cuyo prop'osito es mejorar la performance en la recuperaci'on de los recursos de la web. A pesar de su gran aceptaci'on y de sentar las bases del pr'oximo \textsc{http 2.0}, hay ciertas cuestiones que todav'ia quedan por revisar. En este paper, se propone evaluar la performance de \textsc{spdy} desde dos enfoques diferentes, uno en embientes espec'ificos y otro en la web.
+Actualmente, la Web se sustenta con el est'andar \textsc{http}. Este protocolo tuvo su 'ultima versi'on en el a'no 1999. L'as p'aginas en ese entonces eran muy diferentes a las actuales, tanto en contenido como en recursos. Google desarroll'o un protocolo en el a'no 2009 llamado \textsc{spdy}, cuyo prop'osito es mejorar la performance en la recuperaci'on de los recursos de la web. A pesar de su gran aceptaci'on y de sentar las bases del pr'oximo \textsc{http 2.0}, hay ciertas cuestiones que todav'ia quedan por revisar. En este paper, se propone evaluar la performance de \textsc{spdy} desde dos enfoques diferentes, uno en ambientes espec'ificos y otro en la web.
 \end{abstract}
 
 \section{Introducci'on}
@@ -51,7 +51,7 @@ El crecimiento se produce con velocidad \cite{averageWebPage} y hay otras cuesti
 
 \section{SPDY}
 
-\textsc{spdy}\cite{SPDYWhitepaper} es un protocolo de la capa de aplicaci'on \cite{illustratedTCPIP} que funciona sobre SSL \cite{rfcSSL}, permite la transmisi'on de Streams\footnote{???} sobre una conexi'on normal de \textsc{tcp}, que es el Protocolo de Control de Transmisi'on de la capa de Transporte \cite{illustratedTCPIP}). A continuaci'on se comentar'an las caracter'isticas del Protocolo (extra'idas de \cite{SPDYWhitepaper}):
+\textsc{spdy}\cite{SPDYWhitepaper} es un protocolo de la capa de aplicaci'on \cite{illustratedTCPIP} que funciona sobre SSL \cite{rfcSSL}, permite la transmisi'on de Streams\footnote{Flujo de Datos.} sobre una conexi'on normal de \textsc{tcp}, que es el Protocolo de Control de Transmisi'on de la capa de Transporte \cite{illustratedTCPIP}). A continuaci'on se comentar'an las caracter'isticas del Protocolo (extra'idas de \cite{SPDYWhitepaper}):
 
 \begin{enumerate}
 
@@ -98,6 +98,7 @@ Se descargaron los sitios\footnote{Utilizando la opci'on ''Guardar como...'' de 
 \item login.yahoo.com
 \item www.world-flags.com \cite{flags}
 \end{enumerate}
+
 Cada sitio se brind'o utilizando Apache 2.2 \cite{apache}. En \textsc{http} plano, en \textsc{https} utilizando mod\_ssl \cite{modSSL} con un certificado SSL autofirmado con Ubuntu \cite[Secci'on 4]{spdyGT}, y para brindar \textsc{spdy}, se instal'o mod\_spdy \cite{modSPDY}. con el prop'osito de poder realizar un an'alisis de los paquetes que viajan luego de finalizado el experimento se realiz'o la siguiente modificaci'on en la configuraci'on del SSL, que es el archivo \emph{''/etc/apache2/mods-enabled/ssl.conf''} \cite{siffSSL}.
 
 \begin{quote}\small
@@ -125,6 +126,7 @@ firewall\_type=''OPEN''
 
 gateway\_enable=''YES''
 \end{quote}
+
 Se configur'o el siguiente flag:
 \begin{quote}\small
 sysctl net.inet.ip.forwarding=1
@@ -141,7 +143,7 @@ Se utiliz'o el navegador \emph{Chromium} Versi'on 30 que, a trav'ez de su API de
 \end{enumerate} 
 
 \subsection{Metodolog'ia}
-
+ \label{exp1meto}
 Con la idea de comparar los m'etodos \textsc{http}, \textsc{https} y \textsc{spdy} en diferentes ambientes simulados, se definieron los siguientes valores:
 
 \vspace*{1\baselineskip}
@@ -167,7 +169,7 @@ Con la idea de comparar los m'etodos \textsc{http}, \textsc{https} y \textsc{spd
 	\\
 \end{tabular}
 
-En el Proxy, se cre'o una \emph{tuber'ia}\footnote{objeto intermediario donde se simulan diferentes entornos} de la siguiente manera
+En el Proxy, se cre'o una \emph{tuber'ia}\footnote{objeto intermediario donde se simulan diferentes entornos} de la siguiente manera.
 
 \begin{quote}\small
 ipfw add 1000 pipe 1 ip from any to any;
@@ -181,7 +183,23 @@ ipfw pipe 1 config bw 1000Kbp/s delay 100ms;
 
 Se combinaron todos los Anchos de Banda con todos los Retrasos para cada uno de los m'etodos por p'agina\footnote{Por ejemplo: 100Kbps de Ancho de Banda con 100ms de Retraso accediendo al host virtual de Amazon por \textsc{https} (https://www.amazon.com).}.
 
-En el Servidor se iba activando o desactivando \emph{mod\_spdy} seg'un era requerido.
+En el Servidor se iba activando \emph{mod\_spdy} seg'un era requerido, utilizando:
+
+\begin{quote}\small
+a2enmod spdy
+\end{quote}
+
+O desactivando:
+
+\begin{quote}\small
+a2dismod spdy
+\end{quote}
+
+En el cliente cuando se testeaba \textsc{spdy} se desactivaba tambi'en la utilizaci'on desde el Browser con el flag\footnote{http://peter.sh/experiments/chromium-command-line-switches/}:
+
+\begin{quote}\small
+--use-spdy=off
+\end{quote}
 
 El algoritmo\footnote{Disponible en \cite[exp1.sh]{spdy-tests}} fu'e el siguiente:
 
@@ -211,17 +229,67 @@ El algoritmo\footnote{Disponible en \cite[exp1.sh]{spdy-tests}} fu'e el siguient
 	\END
 \end{pseudocode}
 
-Se repiti'o el experimento 7 veces y se promediaron los resultados.
+Se repiti'o el experimento 7 veces para poder promediar los resultados. La informaci'on obtenida (archivos .har y .pcap) se proces'o para obtener los tiempos basados en el \emph{.har} \cite{harSpec}, OnLoad\footnote{Tiempo en el que el sitio se carga.} y OnContentLoad\footnote{Tiempo en el que el contenido del sitio se carga.} y el basado en la captura de \emph{Tshark}, ToW\footnote{Tiempo en el cable, medido desde el primer paquete que se env'ia al servidor hasta el 'ultimo.}. Estos resultados se almacenaron en una base de datos \emph{SQLite} \cite{SQLite} para su posterior an'alisis.
 
 \subsection{Resultados}
 
-...
+En cuanto a las medidas seleccionadas para el experimento, se observ'o que, el valor del \emph{onContentLoad} presenta una diferencia notable de las otras 2 medidas (\emph{onLoad} y \emph{ToW}) cuando el sitio tiene mucho contenido (por ejemplo en los sitios de amazon y worldflags) (Ver Figura \ref{graf1}). En cambio cuando el sitio tiene escaso contenido (el caso de yahoo y bing), las medidas se encuentran mas cercanas en sus valores (Ver Figura \ref{graf2}). De todas maneras, el tiempo onLoad, es el que se encuentra m'as cerca del tiempo que percibe el usuario cuando el navegador que est'a utilizando termina de renderizar el sitio en cuesti'on.
+
+\begin{figure}[h!]
+  	\centering
+	\includegraphics[scale=0.65]{exp1_1}
+	\caption{\small www.worldflags.com - HTTPS - 1024Kbps}
+	\label{graf1}
+\end{figure}
+
+\begin{figure}[h!]
+  	\centering
+	\includegraphics[scale=0.65]{exp1_2}
+	\caption{\small www.bing.com - HTTPS - 1024Kbps}
+	\label{graf2}
+\end{figure}
+
+Hay un caso particular en el que la utilizaci'on de \textsc{spdy} mejora notablemente los tiempos de carga de los sitios, y es en el caso de \emph{www.worldflags.com}, como se puede ver en la Figura \ref{graf3} y \ref{graf4}.
+
+Este sitio est'a tomado de \cite{modspdyApache} y se puede ver online en \cite{flags}. Es el caso emblem'atico para el protocolo, ya que reune las caracter'isticas para que el funcionamiento de \textsc{spdy} sea el 'optimo. Es un sitio sencillo con 196 recursos (im'agenes) todas almacenadas en el mismo lugar, esto aprovecha al m'aximo la utilizaci'on de los flujos de datos del protocolo en contraposici'on con la cantidad de conexiones que se deben realizar (utilizando \textsc{http} o textsc{https}) con el servidor para traer tantos recursos.
+
+\begin{figure}[h!]
+  	\centering
+	\includegraphics[scale=0.65]{exp1_3}
+	\caption{\small www.worldflags.com - onLoad - 256Kbps}
+	\label{graf3}
+\end{figure}
+
+\begin{figure}[h!]
+  	\centering
+	\includegraphics[scale=0.65]{exp1_4}
+	\caption{\small www.worldflags.com - Tow - 10240Kbps}
+	\label{graf4}
+\end{figure}
+
+Se observ'o el mismo comportamiento que plantea \emph{Mike Belshe} en \cite{moreBand}. Esto se puede ver en la Figura \ref{graf5} en donde al ir aumentando el Ancho de Banda pero con el mismo retardo de 500ms, el tiempo de carga del sitio va formando una constante.
+
+\begin{figure}[h!]
+  	\centering
+	\includegraphics[scale=0.65]{exp1_5}
+	\caption{\small login.yahoo.com - onLoad - 500ms}
+	\label{graf5}
+\end{figure}
+
+El rendimiento de los protocolos cuando la velocidad es alta es similar, en cambio cuando son sometidos a velocidades bajas, \textsc{spdy} mejora su performance frente a los dem'as, tal como se ve en la Figura \ref{graf6}
+
+\begin{figure*}[ht]
+  	\centering
+	\includegraphics[scale=0.65]{exp1_6}
+	\caption{\small www.amazon - onLoad - 250ms}
+	\label{graf6}
+\end{figure*}
 
 \section{Experimento 2}
 \label{experimento2}
 \subsection{Preparaci'on}
 
-Se configur'o un Cliente con las mismas configuraciones que las del Experimento 1 (ver secci'on \ref{experimento1}). Se seleccionaron los siguientes sitios, basados en el art'iculo \cite{effectSPDY}, con el agregado de 2 sitios m'as con diferente contenido para la prueba:
+Se configur'o un Cliente con las mismas caracter'isticas que las del Experimento 1 (ver secci'on \ref{experimento1}). Se seleccionaron los siguientes sitios, basados en el art'iculo \cite{effectSPDY}, con el agregado de 2 sitios m'as con contenido diferente a la p'agina principal de 2 de los sitios testeados (blogspot-blogger y wordpress):
 \begin{enumerate}
 \item www.facebook.com
 \item www.google.com
@@ -237,7 +305,7 @@ Se configur'o un Cliente con las mismas configuraciones que las del Experimento 
 
 \subsection{Metodolog'ia}
 
-Se modific'o el algoritmo utilizado en el experimento anterior quedando 'este de la siguiente manera:
+Se quit'o todo lo relacionado a ancho de banda y retardo del algoritmo utilizado en el experimento anterior quedando 'este de la siguiente manera:
 
 \begin{pseudocode}{experimento2}{ }
 \FOR metodo \in (http,https,spdy) \DO \\
@@ -264,6 +332,8 @@ Luego, se dej'o el experimento corriendo durante 7 d'ias, ejecut'andose el mismo
 \item 20:00
 \end{enumerate}
 
+Finalizada la semana, se recolectaron los datos de la misma manera que en el Experimento 1 (ver \ref{exp1meto}).
+
 \subsection{Resultados}
 
 ...
@@ -273,9 +343,9 @@ Luego, se dej'o el experimento corriendo durante 7 d'ias, ejecut'andose el mismo
 ...
 
 
-A futuro una de las pruebas a realizar ser'ia, utilizando la suite de prueba del Experimento 1, ejecutar los tests pero con otros servidores que soporten SPDY, tales como \emph{Jetty Web Server}\footnote{http://wiki.eclipse.org/Jetty/Feature/SPDY}, \emph{Python implementation of a SPDY server}\footnote{http://github.com/mnot/nbhttp/tree/spdy}, \emph{Ruby SPDY}\footnote{https://github.com/igrigorik/spdy} o \emph{node.js SPDY}\footnote{https://github.com/indutny/node-spdy}.
+A futuro una de las pruebas a realizar ser'ia, utilizando la suite de prueba del Experimento 1, ejecutar los tests pero con otros servidores que soporten SPDY, tales como \emph{Jetty Web Server}\footnote{http://wiki.eclipse.org/Jetty/Feature/SPDY}, \emph{Python implementation of a SPDY server}\footnote{http://github.com/mnot/nbhttp/tree/spdy}, \emph{Ruby SPDY}\footnote{https://github.com/igrigorik/spdy} o \emph{node.js SPDY}\footnote{https://github.com/indutny/node-spdy}. Para poder medir la performance de \emph{spdy} en diferentes implementaciones del protocolo.
 
-Agregar Selenium.
+Otra herramienta interesante para realizar mediciones es Selenium \cite{selenium}, con esta herramienta se pueden automatizar diferentes interacciones con los sitios utilizando un navegador web. Si bien estos tests concluyen que \textsc{spdy} mejora la performance de la carga de un sitio, las caracter'isticas del protocolo se desempe'nan al m'aximo cuando el usuario se encuentra navegando el sitio. Con esta herramienta se podr'ia medir como se comporta \textsc{spdy} en una utilizaci'on cuasi real.
 
 \nocite{*}
 \bibliography{bibliography}

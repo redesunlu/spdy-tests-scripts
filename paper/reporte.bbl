@@ -1,8 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{maqVirtuales}
-\url{http://www.marcelofernandez.info/files/}.
-
 \bibitem{modSSL}
 Apache module mod\_ssl.
 \newblock \url{http://httpd.apache.org/docs/2.2/mod/mod_ssl.html}.
@@ -39,6 +36,14 @@ nodejs.
 \bibitem{rfcSSL}
 The secure sockets layer (ssl) protocol version 3.0.
 \newblock \url{http://tools.ietf.org/html/rfc6101}.
+
+\bibitem{selenium}
+selenium - browser automation framework.
+\newblock \url{https://code.google.com/p/selenium/}.
+
+\bibitem{SQLite}
+Sqlite.
+\newblock \url{http://www.sqlite.org/}.
 
 \bibitem{tshark}
 Tshark.
@@ -81,6 +86,10 @@ Tammy Everts.
   \url{http://www.webperformancetoday.com/2013/11/26/web-page-growth-151-percent/}.
 \newblock 26 de Noviembre 2013.
 
+\bibitem{maqVirtuales}
+Marcelo Fernandez.
+\newblock \url{http://www.marcelofernandez.info/files/}.
+
 \bibitem{apache}
 The Apache~Software Foundation.
 \newblock Apache.
@@ -116,6 +125,16 @@ Pablo~Maximiliano Lulic.
 mdsteele@google.com.
 \newblock Getting started with mod\_spdy.
 \newblock \url{https://code.google.com/p/mod-spdy/wiki/GettingStarted}.
+
+\bibitem{modspdyApache}
+mod\_spdy.
+\newblock mod\_spdy - news and updates for the apache spdy module.
+\newblock \url{https://www.modspdy.com/}.
+
+\bibitem{harSpec}
+Jan~Odvarko odvarko@gmail.com.
+\newblock Har 1.2 spec.
+\newblock \url{http://www.softwareishard.com/blog/har-12-spec/}.
 
 \bibitem{illustratedTCPIP}
 W.~Richard Stevens.
