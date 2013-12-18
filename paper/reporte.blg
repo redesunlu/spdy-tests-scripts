@@ -19,45 +19,45 @@ Warning--to sort, need author or key in selenium
 Warning--to sort, need author or key in FreeBSD
 Warning--empty journal in moreBand
 Warning--empty journal in effectSPDY
-You've used 34 entries,
+You've used 38 entries,
             2118 wiz_defined-function locations,
-            637 strings with 7307 characters,
-and the built_in function-call counts, 6427 in all, are:
-= -- 599
-> -- 165
+            656 strings with 8201 characters,
+and the built_in function-call counts, 7501 in all, are:
+= -- 698
+> -- 229
 < -- 0
-+ -- 81
-- -- 44
-* -- 190
-:= -- 957
-add.period$ -- 90
-call.type$ -- 34
-change.case$ -- 122
++ -- 107
+- -- 66
+* -- 239
+:= -- 1143
+add.period$ -- 106
+call.type$ -- 38
+change.case$ -- 145
 chr.to.int$ -- 0
-cite$ -- 50
-duplicate$ -- 249
-empty$ -- 753
-format.name$ -- 44
-if$ -- 1468
+cite$ -- 54
+duplicate$ -- 277
+empty$ -- 841
+format.name$ -- 66
+if$ -- 1693
 int.to.chr$ -- 0
-int.to.str$ -- 34
+int.to.str$ -- 38
 missing$ -- 4
-newline$ -- 161
-num.names$ -- 40
-pop$ -- 274
+newline$ -- 185
+num.names$ -- 48
+pop$ -- 321
 preamble$ -- 1
-purify$ -- 90
+purify$ -- 109
 quote$ -- 0
-skip$ -- 261
+skip$ -- 281
 stack$ -- 0
-substring$ -- 173
-swap$ -- 32
+substring$ -- 193
+swap$ -- 36
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 134
+type$ -- 150
 warning$ -- 16
-while$ -- 40
-width$ -- 36
-write$ -- 285
+while$ -- 48
+width$ -- 40
+write$ -- 329
 (There were 16 warnings)

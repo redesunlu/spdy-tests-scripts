@@ -57,6 +57,20 @@ Virtual box.
 World flags mod\_spdy demo.
 \newblock \url{https://www.modspdy.com/world-flags/}.
 
+\bibitem{http2}
+Internet architects propose encrypting all the~world?s Web~traffic.
+\newblock Hypertext transfer protocol version 2.0.
+\newblock \url{http://tools.ietf.org/search/draft-ietf-httpbis-http2-09}.
+\newblock 04/12/2013.
+
+\bibitem{art1http2}
+M.~Belshe, Twist, R.~Peon, Inc Google, Ed. M.~Thomson, Microsoft, Ed.
+  A.~Melnikov, and Isode Ltd.
+\newblock Internet architects propose encrypting all the world's web traffic.
+\newblock
+  \url{http://arstechnica.com/security/2013/11/encrypt-all-the-worlds-web-traffic-internet-architects-propose/}.
+\newblock 14/11/2013.
+
 \bibitem{moreBand}
 Mike Belshe.
 \newblock More bandwidth doesn't matter (much).
@@ -66,6 +80,21 @@ Mike Belshe.
 Andrea Cardaci.
 \newblock Capture har files from a remote chrome instance.
 \newblock \url{https://github.com/cyrus-and/chrome-har-capturer}.
+
+\bibitem{art2http2}
+Brad Chacos.
+\newblock Next-gen http 2.0 protocol will require https encryption (most of the
+  time).
+\newblock
+  \url{http://www.pcworld.com/article/2061189/next-gen-http-2-0-protocol-will-require-https-encryption-most-of-the-time-.html}.
+\newblock 13/11/2013.
+
+\bibitem{art3http2}
+Richard Chirgwin.
+\newblock Mandatory http 2.0 encryption proposal sparks hot debate.
+\newblock
+  \url{http://www.theregister.co.uk/2013/11/14/http_20_encryption_proposal_sparks_hot_debate/}.
+\newblock 14/11/2013.
 
 \bibitem{debuggingChrome}
 Google Developers.

@@ -31,9 +31,9 @@ El protocolo \textsc{http} tuvo su primera versi'on en mayo de 1996, culminando 
 
 \section{La Web en la Actualidad}
 
-En comparaci'on con lo que era la web en la 'epoca en la que se implement'o el protocolo \textsc{http}, hubo un crecimiento amplio en el tama'no y en la cantidad de recursos de un sitio web. Para Noviembre de 2013 \cite{httpArchive}, el tama'no promedio de un sitio era de 1614kb, en contraste con Noviembre de 2010 que el tama'no promedio era de 702kb, el aumento fue casi del 50\%. Estudios m'as recientes, indican que el crecimiento de un sitio promedio es del \%151 \cite{tammy} (ver figura \ref{average}).
+En comparaci'on con lo que era la web en la 'epoca en la que se implement'o el protocolo \textsc{http}, hubo un crecimiento amplio en el tama'no y en la cantidad de recursos de un sitio web. Para Noviembre de 2013 \cite{httpArchive}, el tama'no promedio de un sitio era de 1614kb, en contraste con Noviembre de 2010 que el tama'no promedio era de 702kb, el aumento fue casi del 50\%. Estudios m'as recientes, indican que el crecimiento de un sitio promedio es del \%151 \cite{tammy} (ver Figura \ref{average}).
 
-El crecimiento se produce con velocidad \cite{averageWebPage} y hay otras cuestiones relacionadas al tiempo de carga de una p'agina, no solo el ancho de banda \cite{moreBand}, sino por ejemplo, el \textsc{rtt}\footnote{Tiempo que tarda un paquete de datos en ir desde el emisor al receptor y volver al emisor.}, como se puede ver en la figura \ref{rttBelsche}
+El crecimiento se produce con velocidad \cite{averageWebPage} y hay otras cuestiones relacionadas al tiempo de carga de una p'agina, no solo el ancho de banda \cite{moreBand}, sino por ejemplo, el \textsc{rtt}\footnote{Tiempo que tarda un paquete de datos en ir desde el emisor al receptor y volver al emisor.}, como se puede ver en la Figura \ref{rttBelsche}
 
 \begin{figure}[h!]
   	\centering
@@ -343,7 +343,8 @@ Se recolectaron entre 44 y 47 capturas de cada sitio por m'etodo, se promediaron
 \hline
 \hline
  & onContentLoad & onLoad & Tow\\
-\hlineHTTP & 3585 & 5909 & 8419 \\
+\hline
+HTTP & 3585 & 5909 & 8419 \\
 HTTPS & 3533 & 5383 & 7831 \\
 SPDY & 3249 & 4995 & 8046 \\
 \hline
@@ -466,6 +467,8 @@ SPDY & 1730 & 1730 & 3445 \\
 \hline
 \end{tabular}}
 
+\vspace*{2\baselineskip}
+En el 50\% de los casos \textsc{spdy} super'o a \textsc{https} y a \textsc{http}. Es una cifra importante dado que el 93\% de los sitios en Internet usan \textsc{http} como se puede ver en el gr'afico de la Figura \ref{httpvsthhps} \cite[run 15/11/2013]{httpArchive}.
 \begin{figure*}[ht]
   	\centering
 	\includegraphics[scale=0.93]{exp2_1}
@@ -473,41 +476,42 @@ SPDY & 1730 & 1730 & 3445 \\
 	\label{graf7}
 \end{figure*}
 
-\begin{figure*}[ht]
+Por otra parte, que en un 50\% haya superado a \textsc{https} es otro resultado favorable en vistas de un posible HTTP 2.0 \cite{http2} que necesite ser encriptado obligatoriamente \cite{art1http2} \cite{art2http2} \cite{art3http2}. Ver Figuras \ref{graf7}, \ref{graf8} y \ref{graf9}.
+
+\begin{figure}[h]
   	\centering
-	\includegraphics[scale=0.93]{exp2_2}
-	\caption{\small onLoad}
-	\label{graf8}
-\end{figure*}
+	\includegraphics[scale=0.53]{httpvshttps}
+	\caption{\small HTTPS Requests}
+	\label{httpvsthhps}
+\end{figure}
 
-\begin{figure*}[ht]
-  	\centering
-	\includegraphics[scale=0.93]{exp2_3}
-	\caption{\small ToW}
-	\label{graf9}
-\end{figure*}
-
-\vspace*{2\baselineskip}
-En el 60\% de los casos \textsc{spdy} super'o a \textsc{https} y a \textsc{http}, y en un 70\% super'o a \textsc{https}. Son cifras importantes dado que el 91\% de los sitios en Internet usan \textsc{http} PONER CITA.
-(Agregar lo de http2)
-
-(poner las caracteristicas de los sitios en el que spdy es mejor)
-
-(poner porque  fue superado en youm y en imgur)
+\textsc{spdy} se ve superado en sitios con grandes contenidos, aquellos que necesitan de mucho tiempo para completar las peticiones son proclives a tener inconvenientes que necesiten de retransmitir el mensaje. Este tiempo que toma retransmitir todo el mensaje completo, hace que disminuya su rendimiento en estas situaciones.
 
 \section{Conclusiones}
 
-...
-
-...
-
-...
+\textsc{spdy} propone las bases para el futuro \textsc{http 2.0}, ofrece nuevas caracter'isticas que pueden ser aprovechadas y mejora la performance en ciertos casos. El protocolo es fuerte en condiciones en las que se presentan enlaces con Velocidades Bajas y con cierto Retardo, en condiciones favorables, el protocolo puede presentar inconvenientes por cuestiones de p'erdida de paquetes y retransmisi'on. Tambi'en, todas las t'ecnicas para incrementar la performance que se ven'ian y se siguen utilizando\footnote{css sprites, domain sharding, combinaciones de archivos de javascript, combinaci'on de archivos css, recursos as'incronos, etc.} no son necesarias para el buen funcionamiento del protocolo. El mejor escenario para \textsc{spdy} es el sitio con las caracter'isticas de \emph{worldflags}, es decir, con todos o la mayor'ia de los recursos en el mismo dominio, esto aprovecha al m'aximo la multiplexaci'on de streams de datos.
 
 \section{Trabajos Futuros}
 
 A futuro una de las pruebas a realizar ser'ia, utilizando la suite de prueba del Experimento 1, ejecutar los tests pero con otros servidores que soporten SPDY, tales como \emph{Jetty Web Server}\footnote{http://wiki.eclipse.org/Jetty/Feature/SPDY}, \emph{Python implementation of a SPDY server}\footnote{http://github.com/mnot/nbhttp/tree/spdy}, \emph{Ruby SPDY}\footnote{https://github.com/igrigorik/spdy} o \emph{node.js SPDY}\footnote{https://github.com/indutny/node-spdy}. Para poder medir la performance de \emph{spdy} en diferentes implementaciones del protocolo.
 
 Otra herramienta interesante para realizar mediciones es Selenium \cite{selenium}, con esta herramienta se pueden automatizar diferentes interacciones con los sitios utilizando un navegador web. Si bien estos tests concluyen que \textsc{spdy} mejora la performance de la carga de un sitio, las caracter'isticas del protocolo se desempe'nan al m'aximo cuando el usuario se encuentra navegando el sitio. Con esta herramienta se podr'ia medir como se comporta \textsc{spdy} en una utilizaci'on cuasi real.
+
+\begin{figure}[h]
+  	\centering
+	\includegraphics[scale=0.93]{exp2_2}
+	\caption{\small onLoad}
+	\label{graf8}
+\end{figure}
+
+\begin{figure}[h]
+  	\centering
+	\includegraphics[scale=0.93]{exp2_3}
+	\caption{\small ToW}
+	\label{graf9}
+\end{figure}
+
+\onecolumn
 
 \nocite{*}
 \bibliography{bibliography}
