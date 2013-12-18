@@ -27,7 +27,17 @@ Actualmente, la Web se sustenta con el est'andar \textsc{http}. Este protocolo t
 
 \section{Introducci'on}
 
-El protocolo \textsc{http} tuvo su primera versi'on en mayo de 1996, culminando en 1999 con el est'andar actual que es el \textsc{http}  1.1 \cite{rfcHTTP} Es un protocolo sin estado, el servidor no mantiene informaci'on acerca de las diferentes peticiones que le llegan, lo que conlleva a que se necesite realizar una conexi'on nueva por cada recurso que se necesite de un sitio web.
+El protocolo \textsc{http} tuvo su primera versi'on en mayo de 1996, culminando en 1999 con el est'andar actual que es el \textsc{http}  1.1 \cite{rfcHTTP} Es un protocolo sin estado, el servidor no mantiene informaci'on acerca de las diferentes peticiones que le llegan, lo que conlleva a que se necesite realizar una petici'on nueva por cada recurso que se necesite de un sitio web, incluso siendo del mismo dominio. Esto genera tr'afico innecesario entre petici'on y petici'on cuando el cliente necesita establecer una conexi'on nueva para obtener el recurso. Con \textsc{spdy} esta cuesti'on se resuelve y, junto con otras caracter'isticas que se ver'an mas adelante, se mejora la performance de la recuperaci'on de un sitio web.
+
+Se realizar'an 2 experimentos, en ambos se evaluar'an los tiempos de carga de diferentes sitios (detallados m'as adelante), utilizando las siguientes medidas:
+
+\begin{enumerate}
+\item onContentLoad: Tiempo en el que el contenido del sitio se carga.
+\item onLoad: Tiempo en el que es sitio se carga seg'un el navegador.
+\item ToW (Time on Wire): Tiempo en el cable, medido desde el primer paquete que se env'ia al servidor hasta el 'ultimo.
+\end{enumerate}
+
+Se busca comparar la performance de \textsc{spdy} frente a \textsc{http} y \textsc{https}. El primer experimento se realizar'a en un ambiente controlado, emulando diferentes combinaciones de Ancho de Banda y Retardo, obteniendo sitios descargados previamente. En segundo experimento se realizar'a en un ambiente real, recuperando sitios populares.
 
 \section{La Web en la Actualidad}
 
@@ -227,7 +237,7 @@ El algoritmo\footnote{Disponible en \cite[exp1.sh]{spdy-tests}} fu'e el siguient
 	\END
 \end{pseudocode}
 
-Se repiti'o el experimento 7 veces para poder promediar los resultados. La informaci'on obtenida (archivos .har y .pcap) se proces'o para obtener los tiempos basados en el \emph{.har} \cite{harSpec}, OnLoad\footnote{Tiempo en el que el sitio se carga.} y OnContentLoad\footnote{Tiempo en el que el contenido del sitio se carga.} y el basado en la captura de \emph{Tshark}, ToW\footnote{Tiempo en el cable, medido desde el primer paquete que se env'ia al servidor hasta el 'ultimo.}. Estos resultados se almacenaron en una base de datos \emph{SQLite} \cite{SQLite} para su posterior an'alisis.
+Se repiti'o el experimento 7 veces para poder promediar los resultados. La informaci'on obtenida (archivos .har y .pcap) se proces'o para obtener los tiempos basados en el \emph{.har} \cite{harSpec}, OnLoad y OnContentLoad y el basado en la captura de \emph{Tshark}, ToW. Estos resultados se almacenaron en una base de datos \emph{SQLite} \cite{SQLite} para su posterior an'alisis.
 
 \subsection{Resultados}
 
@@ -471,7 +481,7 @@ SPDY & 1730 & 1730 & 3445 \\
 En el 50\% de los casos \textsc{spdy} super'o a \textsc{https} y a \textsc{http}. Es una cifra importante dado que el 93\% de los sitios en Internet usan \textsc{http} como se puede ver en el gr'afico de la Figura \ref{httpvsthhps} \cite[run 15/11/2013]{httpArchive}.
 \begin{figure*}[ht]
   	\centering
-	\includegraphics[scale=0.93]{exp2_1}
+	\includegraphics[scale=0.83]{exp2_1}
 	\caption{\small onContentLoad}
 	\label{graf7}
 \end{figure*}
@@ -481,7 +491,7 @@ Por otra parte, que en un 50\% haya superado a \textsc{https} es otro resultado 
 \begin{figure}[h]
   	\centering
 	\includegraphics[scale=0.53]{httpvshttps}
-	\caption{\small HTTPS Requests}
+	\caption{\small Porcentajes de utilizaci'on de los protocolos HTTP y HTTPS.}
 	\label{httpvsthhps}
 \end{figure}
 
@@ -499,14 +509,14 @@ Otra herramienta interesante para realizar mediciones es Selenium \cite{selenium
 
 \begin{figure}[h]
   	\centering
-	\includegraphics[scale=0.93]{exp2_2}
+	\includegraphics[scale=0.83]{exp2_2}
 	\caption{\small onLoad}
 	\label{graf8}
 \end{figure}
 
 \begin{figure}[h]
   	\centering
-	\includegraphics[scale=0.93]{exp2_3}
+	\includegraphics[scale=0.83]{exp2_3}
 	\caption{\small ToW}
 	\label{graf9}
 \end{figure}
