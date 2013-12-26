@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.9.22)  19 DEC 2013 00:43
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.9.22)  26 DEC 2013 00:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -841,35 +841,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 417--429
  []
 
 
+Underfull \vbox (badness 7081) has occurred while \output is active []
+
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 430.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 430.
+ [6 <./exp1_6.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 430--442
 []\OT1/cmr/m/it/10.95 www.twitter.com
  []
 
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 442.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 442.
-[6 <./exp1_6.png (PNG copy)>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 443--455
 []\OT1/cmr/m/it/10.95 www.wordpress.com
  []
@@ -907,9 +910,6 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 502.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 502.
-
-Underfull \vbox (badness 7273) has occurred while \output is active []
-
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 506.
 Package babel Info: Redefining spanish shorthand >>
@@ -1149,7 +1149,7 @@ xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texli
 ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on reporte.pdf (10 pages, 658976 bytes).
+Output written on reporte.pdf (10 pages, 658967 bytes).
 PDF statistics:
  423 PDF objects out of 1000 (max. 8388607)
  378 compressed objects within 4 object streams
