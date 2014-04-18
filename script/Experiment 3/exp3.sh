@@ -23,6 +23,10 @@ export DISPLAY=:0
 
 rm -r $OUTPUT_DIR $LOGFILE
 mkdir -p $OUTPUT_DIR
+mkdir -p $HAR_DIR
+mkdir -p $CAP_DIR
+mkdir -p $RENDERED_SITES
+mkdir -p $RECOVERED_SITES
 
 METHODS=("http" "https" "spdy")
 for method in "${METHODS[@]}"; do
@@ -39,15 +43,22 @@ for method in "${METHODS[@]}"; do
 		hour=$(date +"%H%M")
 		file="$method-$site-$day-$hour"
 		url="$urlmethod://$site"
+		rtt=`ping -c 1 $site | grep rtt | tr "/" " " | cut -d " " -f 8`
 		exec_cmd="$exec_cmd about:blank"
+
+		# @TODO:
+		#	Call PhantomJS script for save site
+		#	Define a usefull wget command for recover site and all recurses
+
+		$RENDER_SITE $urlmethod $site "$RENDERED_SITES/$method-$site-$day-$hour.png"
 
 		$exec_cmd &
 		PID_CHROME=$!
 		sleep 3
-		$TSHARK -i $IFACE -w $OUTPUT_DIR$file.cap &
+		$TSHARK -i $IFACE -w "$CAP_DIR/$file.cap" &
 		PID_TSHARK=$!
 		sleep 3
-		$HARCAPTURER -o $OUTPUT_DIR$file.har $url
+		$HARCAPTURER -o "$HAR_DIR/$file.har" $url
 		sync
 		kill $PID_CHROME
 		sleep 5
