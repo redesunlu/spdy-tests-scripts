@@ -56,7 +56,7 @@ for method in "${METHODS[@]}"; do
 		$exec_cmd &
 		PID_CHROME=$!
 		sleep 3
-		$TSHARK -F libpcap -i $IFACE -w "$CAP_DIR/$file.cap" &
+		$TSHARK -i $IFACE -w "$CAP_DIR/$file.cap" &
 		PID_TSHARK=$!
 		sleep 3
 		$HARCAPTURER -o "$HAR_DIR/$file.har" $url
@@ -66,7 +66,7 @@ for method in "${METHODS[@]}"; do
 		kill $PID_TSHARK
 		finish_time=$(date +"%d/%m/%Y-%H:%M:%S")
 		sync
-		./log.py --log $site $method 3 $file $start_time $finish_time $ip $rtt
+		./log.py --log $site $method 1 $file $start_time $finish_time $ip $rtt
 	done
 done
 ./log.py --parse
