@@ -51,13 +51,9 @@ if '--log' in argv:
     c.execute(sql)
     conn.commit()
 elif '--parse' in argv:
-    # @TODO:
-    #   Make a file parser, needs recover filename from db, only regs with
-    #   clean rtt, onload, oncontentLoad values.
-    #   Then parse jsons files and pcap file with tow.py
-
+    from os import system
     from json import load
-    #from tow import calc_tow
+    from tow import calc_tow
 
     sql = """SELECT file
              FROM t_results_exp3
@@ -66,14 +62,14 @@ elif '--parse' in argv:
              AND    onLoad is null"""
     c.execute(sql)
     files = c.fetchall()
-
     for file in files:
         json_data = open(join(HAR_DIR, file[0] + '.har'))
         data = load(json_data)
         json_data.close()
         oncontentload = data['log']['pages'][0]['pageTimings']['onContentLoad']
         onload = data['log']['pages'][0]['pageTimings']['onLoad']
-        tow = 0 #calc_tow(join(PCAP_DIR, file))
+        system('tshark -F libpcap -w {0}.pcap -r {0}.cap'.format(join(PCAP_DIR, file[0])))
+        tow = calc_tow(join(PCAP_DIR, file[0] + '.pcap'))
 
         sql = '''UPDATE t_results_exp3
                  SET tow = {0},
