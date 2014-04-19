@@ -38,12 +38,13 @@ for method in "${METHODS[@]}"; do
 		exec_cmd="$RUN --use-spdy=off"
 	fi
 	for site in $SITES; do
-		echo "STARTED. Method: $method - Site: $site - $(date)" >> $LOGFILE
+		start_time=$(date +"%d/%m/%Y-%H:%M:%S")
 		day=$(date +"%d%m%Y")
 		hour=$(date +"%H%M")
 		file="$method-$site-$day-$hour"
 		url="$urlmethod://$site"
 		rtt=`ping -c 1 $site | grep rtt | tr "/" " " | cut -d " " -f 8`
+		ip=`ping -c 1 $site | head -n 1 | tr [\(,\)] " " | cut -d " " -f 4`
 		exec_cmd="$exec_cmd about:blank"
 
 		# @TODO:
@@ -55,7 +56,7 @@ for method in "${METHODS[@]}"; do
 		$exec_cmd &
 		PID_CHROME=$!
 		sleep 3
-		$TSHARK -i $IFACE -w "$CAP_DIR/$file.cap" &
+		$TSHARK -F libpcap -i $IFACE -w "$CAP_DIR/$file.cap" &
 		PID_TSHARK=$!
 		sleep 3
 		$HARCAPTURER -o "$HAR_DIR/$file.har" $url
@@ -63,7 +64,9 @@ for method in "${METHODS[@]}"; do
 		kill $PID_CHROME
 		sleep 5
 		kill $PID_TSHARK
-		echo "FINISHED. Method: $method - Site: $site - $(date)" >> $LOGFILE
+		finish_time=$(date +"%d/%m/%Y-%H:%M:%S")
 		sync
+		./log.py --log $site $method 3 $file $start_time $finish_time $ip $rtt
 	done
 done
+./log.py --parse
