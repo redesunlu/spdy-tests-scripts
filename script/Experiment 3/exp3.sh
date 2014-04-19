@@ -51,9 +51,10 @@ for method in "${METHODS[@]}"; do
 
 		# @TODO:
 		#	Call PhantomJS script for save site
-		#	Define a usefull wget command for recover site and all recurses
 
 		$RENDER_SITE $urlmethod $site "$RENDERED_SITES/$method-$site-$day-$hour.png"
+		wget -q -l 1 -r -k -P /tmp $url
+		mv /tmp/$site/ $RECOVERED_SITES/$file/
 
 		$exec_cmd &
 		PID_CHROME=$!
