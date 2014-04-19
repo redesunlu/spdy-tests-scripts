@@ -51,7 +51,7 @@ if '--log' in argv:
     c.execute(sql)
     conn.commit()
 elif '--parse' in argv:
-    from os import system
+    from os import system, remove
     from json import load
     from tow import calc_tow
 
@@ -70,6 +70,7 @@ elif '--parse' in argv:
         onload = data['log']['pages'][0]['pageTimings']['onLoad']
         system('tshark -F libpcap -w {0}.pcap -r {0}.cap'.format(join(PCAP_DIR, file[0])))
         tow = calc_tow(join(PCAP_DIR, file[0] + '.pcap'))
+        remove('{0}.pcap'.format(join(PCAP_DIR, file[0])))
 
         sql = '''UPDATE t_results_exp3
                  SET tow = {0},
