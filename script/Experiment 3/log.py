@@ -7,7 +7,7 @@ from sys import argv
 
 RESULTS_DIR = './results'
 HAR_DIR = RESULTS_DIR + '/har'
-PCAP_DIR = RESULTS_DIR + '/pcap'
+PCAP_DIR = RESULTS_DIR + '/cap'
 
 db = './results.db'
 
