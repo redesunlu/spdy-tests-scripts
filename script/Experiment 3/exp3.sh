@@ -21,7 +21,7 @@ source $SITES_FILE
 
 export DISPLAY=:0
 
-rm -r $OUTPUT_DIR $LOGFILE
+rm -r $OUTPUT_DIR
 mkdir -p $OUTPUT_DIR
 mkdir -p $HAR_DIR
 mkdir -p $CAP_DIR
