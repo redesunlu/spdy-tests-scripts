@@ -2,5 +2,4 @@
 #   Sites file
 ###
 
-SITES="www.google.com.ar
-       www.facebook.com"
+SITES="www.google.com.ar"
