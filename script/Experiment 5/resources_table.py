@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+# This script generate a csv table from a har capture passed by parameter.
+# Usage:
+#       python resources_table.py har_file csv_file
+# Table row format:
+#       ----------------------------
+#       | Name | Type | Size | URL |
+#       ----------------------------
+
 from json import load
 from sys import argv
 
@@ -20,7 +28,7 @@ for entry in json_data['log']['entries']:
     # Filtering parameters in resource name
     name = name.split('?')[0]
     if name == '':
-        name = '/'
+        name = '-'
     size = entry['response']['content']['size']
     mimetype = entry['response']['content']['mimeType']
     type = mimetype.split('/')[1]
@@ -28,7 +36,7 @@ for entry in json_data['log']['entries']:
     n_resources += 1
     total_size += size
 
-header = """Number of Resources;{0}
+theader = """Number of Resources;{0}
 Total Size (Bytes);{1}\n
 Detail
 Name;Type;Size (Bytes);URL\n""".format(n_resources, total_size)
@@ -37,5 +45,5 @@ for (name, type, size, url) in resources:
     table += "{0};{1};{2};{3}\n".format(name, type, size, url)
 
 csv = open(output_filename, 'w')
-csv.write(header + table)
+csv.write(theader + table)
 csv.close()
