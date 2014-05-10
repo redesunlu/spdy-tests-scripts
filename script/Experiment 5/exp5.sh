@@ -49,9 +49,6 @@ for method in "${METHODS[@]}"; do
 		ip=`ping -c 1 $site | head -n 1 | tr [\(,\)] " " | cut -d " " -f 4`
 		exec_cmd="$exec_cmd about:blank"
 
-		# @TODO:
-		#	Call PhantomJS script for save site
-
 		$RENDER_SITE $urlmethod $site "$RENDERED_SITES/$method-$site-$day-$hour.png"
 		wget -q -l 1 -r -k -P /tmp $url
 		mv /tmp/$site/ $RECOVERED_SITES/$file/
