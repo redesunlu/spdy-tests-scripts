@@ -33,11 +33,9 @@ for method in "${METHODS[@]}"; do
 	if [ "$method" = "spdy" ]; then
 		urlmethod="https"
 		exec_cmd=$RUN
-		filter_port=443
 	else
 		urlmethod=$method
 		exec_cmd="$RUN --use-spdy=off"
-		filter_port=80
 	fi
 	for site in $SITES; do
 		start_time=$(date +"%d/%m/%Y-%H:%M:%S")
@@ -57,7 +55,7 @@ for method in "${METHODS[@]}"; do
 		PID_CHROME=$!
 		sleep 3
 
-		$TSHARK -i $IFACE -f "port $filter_port" -w "$CAP_DIR/$file.cap" &
+		$TSHARK -i $IFACE -f "$TSHARK_FILTER" -w "$CAP_DIR/$file.cap" &
 		PID_TSHARK=$!
 		sleep 3
 		$HARCAPTURER -o "$HAR_DIR/$file.har" $url
