@@ -69,7 +69,7 @@ elif '--parse' in argv:
         oncontentload = data['log']['pages'][0]['pageTimings']['onContentLoad']
         onload = data['log']['pages'][0]['pageTimings']['onLoad']
         system('tshark -F libpcap -w {0}.pcap -r {0}.cap'.format(join(PCAP_DIR, file[0])))
-        tow = calc_tow(join(PCAP_DIR, file[0] + '.pcap'))
+        tow = calc_tow(join(PCAP_DIR, file[0] + '.pcap')) * 1000
         remove('{0}.pcap'.format(join(PCAP_DIR, file[0])))
 
         sql = '''UPDATE t_results_exp3
