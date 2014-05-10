@@ -11,6 +11,7 @@ var site = args[2];
 var dest = args[3];
 
 var page = require('webpage').create();
+page.viewportSize = {width: 1024, height: 768};
 page.open(urlmethod + '://' + site, function() {
     page.render(dest);
     phantom.exit();
