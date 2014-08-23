@@ -27,6 +27,7 @@ mkdir -p $HAR_DIR
 mkdir -p $CAP_DIR
 mkdir -p $RENDERED_SITES
 mkdir -p $RECOVERED_SITES
+mkdir -p $RESOURCES_TABLES
 
 METHODS=("http" "https" "spdy")
 for method in "${METHODS[@]}"; do
@@ -48,8 +49,9 @@ for method in "${METHODS[@]}"; do
 		exec_cmd="$exec_cmd about:blank"
 
 		$RENDER_SITE $urlmethod $site "$RENDERED_SITES/$method-$site-$day-$hour.png"
-		wget -q -l 1 -r -k -P /tmp $url
+		wget -q -E -H -k -K -p -P /tmp $url
 		mv /tmp/$site/ $RECOVERED_SITES/$file/
+        python resources_table.py "$RESOURCES_TABLES/$file" 
 
 		$exec_cmd &
 		PID_CHROME=$!
