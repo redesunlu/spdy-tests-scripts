@@ -52,23 +52,30 @@ def test_site(site):
 
 conn, c = connect_db()
 
+limit = 2
+
 with open('list.txt') as list_file:
     lines = list_file.readlines()
 
     for line in lines:
-        row = line[:-1].split(';')
-        country_code = row[0]
-        topk = row[1]
-        url = row[2]
-        print 'Checking: {} {} {}'.format(country_code, topk, url)
-        result = test_site(url)
-        if result is not None:
-            if result:
-                spdy = 'OK'
+        retries = 0
+        while retries < limit:
+            row = line[:-1].split(';')
+            country_code = row[0]
+            topk = row[1]
+            url = row[2]
+            print 'Checking ({}): {} {} {}'.format(retries, country_code,
+                                                   topk, url)
+            result = test_site(url)
+            if result is not None:
+                if result:
+                    spdy = 'OK'
+                    break
+                else:
+                    spdy = 'Fail'
             else:
-                spdy = 'Fail'
-        else:
-            spdy = 'Error'
+                spdy = 'Error'
+            retries += 1
 
         save_data(c, conn, country_code, topk, url, spdy)
 
